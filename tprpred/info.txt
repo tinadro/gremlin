@@ -1,0 +1,13 @@
+made using the perl-version of TPRpred, downloaded from ftp://ftp.tuebingen.mpg.de/ebio/protevo/TPRpred/ 
+
+./tprpred.pl /project/home/td1515/2_trees/epsilon-PflAB-trees/PflA-protein-nr.mfa -r tpr2.8.pp -o PflA.out
+./tprpred.pl /project/home/td1515/2_trees/epsilon-PflAB-trees/PflB-protein-nr.mfa -r tpr2.8.pp -o PflB.out
+
+PflA
+top 296 proteins had >99% probability of being TPR
+270th protein had >98% WP_012662129
+271st protein had >96% WP_130234016
+272nd protein had >94% WP_122894088
+
+PflB
+all 280 proteins had >99% probability of being TPR
