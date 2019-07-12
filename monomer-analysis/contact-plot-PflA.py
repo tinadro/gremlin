@@ -6,7 +6,8 @@ import matplotlib.colors as mcolors
 import sys
 
 e = sys.argv[1] # -10 or -20
-data = 'HHblits-eval1e'+e+'/PflB-contact-prediction-scores.tsv'
+pfl = 'PflA'
+data = 'HHblits-eval1e'+e+'/PflA-contact-prediction-scores.tsv'
 
 #~~~~~~~~~~~~~~~~~~
 # GET GREMLIN DATA
@@ -15,6 +16,7 @@ data = 'HHblits-eval1e'+e+'/PflB-contact-prediction-scores.tsv'
 gremlin = pd.read_csv(data, sep='\t')
 print(len(gremlin))
 #gremlin = gremlin[gremlin['distance'] > 3]
+gremlin.sort_values('s_sco', inplace=True)
 print(len(gremlin))
 
 x = gremlin['i'].tolist() + gremlin['j'].tolist()
@@ -22,7 +24,7 @@ y = gremlin['j'].tolist() + gremlin['i'].tolist()
 sco = gremlin['s_sco'].tolist() + gremlin['s_sco'].tolist()
 
 #make empty square matrix of dimensions = protein length 
-mtx = np.empty((820, 820))
+mtx = np.empty((788, 788))
 mtx.fill(np.nan)
 
 for ind, row in gremlin.iterrows():
@@ -47,7 +49,7 @@ def truncate_colormap(cmap, minval=0.0, maxval=1.0, n=-1):
 inferno_t = truncate_colormap(plt.get_cmap('inferno_r'), 0.15, 1)
 
 fig, ax = plt.subplots()
-plt.scatter(x, y, marker='.', s=s, c=mtx[x,y], cmap=inferno_t)
+plt.scatter(x, y, marker='.', s=15, c=mtx[x,y], cmap=inferno_t)
 cbar = plt.colorbar()
 
 ax.xaxis.set_minor_locator(AutoMinorLocator(n=5))
@@ -58,9 +60,13 @@ ax.xaxis.grid(b=True, which='major', linestyle='-')
 ax.xaxis.grid(b=True, which='minor', linestyle='-', color='0.9')
 ax.set_axisbelow(True)
 
-plt.ylim(820, 0)
-plt.xlim(0, 820)
-ax.set_aspect(820/820)
+plt.ylim(800, 0)
+plt.xlim(0, 800)
+ax.set_aspect(800/800)
 plt.tight_layout()
-plt.savefig('PflB-gremlin-plot-1e'+e, dpi=300)
+plt.savefig('../contact-plots/PflA-gremlin-plot-1e'+e, dpi=300)
 plt.show()
+
+
+
+
