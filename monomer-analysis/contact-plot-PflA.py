@@ -6,8 +6,8 @@ import matplotlib.colors as mcolors
 import sys
 
 e = sys.argv[1] # -10 or -20
-pfl = 'PflA'
-data = 'HHblits-eval1e'+e+'/PflA-contact-prediction-scores.tsv'
+msa = sys.argv[2] # msa coverage, 50 or 25
+data = 'HHblits-eval1e'+e+'-msacoverage-'+msa+'/PflA-contact-prediction-scores.tsv'
 
 #~~~~~~~~~~~~~~~~~~
 # GET GREMLIN DATA
@@ -15,7 +15,7 @@ data = 'HHblits-eval1e'+e+'/PflA-contact-prediction-scores.tsv'
 
 gremlin = pd.read_csv(data, sep='\t')
 print(len(gremlin))
-#gremlin = gremlin[gremlin['distance'] > 3]
+#gremlin = gremlin[gremlin['s_sco'] > 1]
 gremlin.sort_values('s_sco', inplace=True)
 print(len(gremlin))
 
@@ -46,10 +46,10 @@ def truncate_colormap(cmap, minval=0.0, maxval=1.0, n=-1):
 	new_cmap = mcolors.LinearSegmentedColormap.from_list('trunc({name},{a:.2f},{b:.2f})'.format(name=cmap.name, a=minval, b=maxval), cmap(np.linspace(minval, maxval, n)))
 	return new_cmap
 
-inferno_t = truncate_colormap(plt.get_cmap('inferno_r'), 0.15, 1)
+cp = truncate_colormap(plt.get_cmap('winter_r'), 0.05, 1)
 
 fig, ax = plt.subplots()
-plt.scatter(x, y, marker='.', s=15, c=mtx[x,y], cmap=inferno_t)
+plt.scatter(x, y, marker='.', s=15, c=mtx[x,y], cmap=cp)
 cbar = plt.colorbar()
 
 ax.xaxis.set_minor_locator(AutoMinorLocator(n=5))
@@ -64,9 +64,5 @@ plt.ylim(800, 0)
 plt.xlim(0, 800)
 ax.set_aspect(800/800)
 plt.tight_layout()
-plt.savefig('../contact-plots/PflA-gremlin-plot-1e'+e, dpi=300)
+plt.savefig('../contact-plots/PflA-gremlin-plot-1e'+e+'-msa-'+msa, dpi=300)
 plt.show()
-
-
-
-

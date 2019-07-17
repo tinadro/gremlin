@@ -1,0 +1,60 @@
+Search stats: 
+Generate MSA using: HHblits, e-value 1e-10, 4 iterations
+Filter MSA: Coverage 50%, remove gaps 75%
+
+
+Human APC6 - anaphase promoting complex protein  
+Length:	620 (526)
+Sequences:	48244	(32613.4)
+Seq/Len:	91.719
+Nf(neff/√len):	1422.0
+
+P. aeruginosa PilF pilin 
+Length:	252 (214)
+Sequences:	108355	(83960.3)
+Seq/Len:	506.332
+Nf(neff/√len):	5739.4
+
+Magnetospirillum MamA
+Length:	217 (204)
+Sequences:	112813	(86629.7)
+Seq/Len:	553.005
+Nf(neff/√len):	6065.3
+
+
+hhblits1 plots: 
+Sequences per length for each position, BEFORE the coverage/gap filter was applied
+Legend: Dots above the red line, indicates positions where there is > 5 sequences per length (if visible, green bar = 20 seq/len). Point of this graphic is to give you an idea if resubmitting a sub-portion of your sequence might help increase the overall Seq/Len
+
+hhblits2 plots:
+Sequences per length for each position, AFTER the coverage/gap filter was applied
+Legend: If visible, the positions blocked in grey are regions that have > 75% gaps and were automatically trimmed and excluded in the GREMLIN analysis
+
+TPR motifs - experimentally comnfirmed: 
+APC6 - Wang 2009, PDB 3HYM, also shown in supplementary figure 5a
+231 - 266
+267 - 294 
+299 - 332
+334 - 367
+368 - 401
+402 - 435
+446 - 478
+479 - 512
+also a half-TPR (single helix) 513 - 526 
+this helix binds the helical region of substrate (CDC26), together forming a geometry similar to 2 hlices in a TPR motif 
+
+PilF - Kim 2006, PDB 2FI7. Also Koo 2010, PDB 2HO1
+35 - 70
+71 - 104 
+104 - 138
+140 - 174
+174 - 208
+208 - 235/40
+
+MamA - Zeytuni 2011. PDB 3AS4, 3AS5, 3AS8, 3ASD, 3ASF, 3ASH, and 3ASG. Also in fig S2 . 
+putative/ predicted 11 - 40 
+44 - 76
+80 - 113 
+114 - 147 
+148 - 181 
+183 - 215 

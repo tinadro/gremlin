@@ -1,0 +1,25 @@
+Search stats: 
+Generate MSA using: HHblits, e-value 1e-10, 4 iterations
+Filter MSA: Coverage 25%, remove gaps 75%
+
+PflA 170-775
+Length:	606 (582)
+Sequences:	97000	(59466.2)
+Seq/Len:	166.667
+Nf(neff/√len):	2465.0
+
+
+PflB 140-810 
+Length:	671 (546)
+Sequences:	83681	(51932.5)
+Seq/Len:	153.262
+Nf(neff/√len):	2222.5
+
+
+hhblits1 plots: 
+Sequences per length for each position, BEFORE the coverage/gap filter was applied
+Legend: Dots above the red line, indicates positions where there is > 5 sequences per length (if visible, green bar = 20 seq/len). Point of this graphic is to give you an idea if resubmitting a sub-portion of your sequence might help increase the overall Seq/Len
+
+hhblits2 plots:
+Sequences per length for each position, AFTER the coverage/gap filter was applied
+Legend: If visible, the positions blocked in grey are regions that have > 75% gaps and were automatically trimmed and excluded in the GREMLIN analysis

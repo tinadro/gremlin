@@ -11,7 +11,8 @@ from os.path import dirname, abspath
 #~~~~~~~~~~~~~~~~~~
 
 e = sys.argv[1] # -10 or -20
-data = 'HHblits-eval1e'+e+'/PflA-contact-prediction-scores.tsv'
+msa = sys.argv[2] # msa coverage, 50 or 25
+data = 'HHblits-eval1e'+e+'-msacoverage-'+msa+'/PflA-contact-prediction-scores.tsv'
 gremlin = pd.read_csv(data, sep='\t')
 print(len(gremlin))
 #gremlin = gremlin[gremlin['distance'] > 3]
@@ -72,22 +73,22 @@ def truncate_colormap(cmap, minval=0.0, maxval=1.0, n=-1):
 	new_cmap = mcolors.LinearSegmentedColormap.from_list('trunc({name},{a:.2f},{b:.2f})'.format(name=cmap.name, a=minval, b=maxval), cmap(np.linspace(minval, maxval, n)))
 	return new_cmap
 
-inferno_t = truncate_colormap(plt.get_cmap('inferno_r'), 0.15, 1)
+inferno_t = truncate_colormap(plt.get_cmap('winter_r'), 0.05, 1)
 
 # Define the scatter plot and colorbar
 fig, ax = plt.subplots()
 plt.scatter(x, y, marker='.', s=15, c=mtx[x,y], cmap=inferno_t)
-plt.scatter(tpr1, tpr1, marker='.', color='green', s=5)
-plt.scatter(tpr2, tpr2, marker='.', color='green', s=5)
-plt.scatter(tpr3, tpr3, marker='.', color='green', s=5)
-plt.scatter(tpr4, tpr4, marker='.', color='green', s=5)
-plt.scatter(tpr5, tpr5, marker='.', color='green', s=5)
-plt.scatter(tpr6, tpr6, marker='.', color='green', s=5)
+plt.scatter(tpr1, tpr1, marker='.', color='deeppink', s=2)
+plt.scatter(tpr2, tpr2, marker='.', color='deeppink', s=2)
+plt.scatter(tpr3, tpr3, marker='.', color='deeppink', s=2)
+plt.scatter(tpr4, tpr4, marker='.', color='deeppink', s=2)
+plt.scatter(tpr5, tpr5, marker='.', color='deeppink', s=2)
+plt.scatter(tpr6, tpr6, marker='.', color='deeppink', s=2)
 
-plt.scatter(tpra, tpra, marker='.', color='green', s=5)
-plt.scatter(tprb, tprb, marker='.', color='green', s=5)
-plt.scatter(tprc, tprc, marker='.', color='green', s=5)
-plt.scatter(tprd, tprd, marker='.', color='green', s=5)
+plt.scatter(tpra, tpra, marker='.', color='deeppink', s=2)
+plt.scatter(tprb, tprb, marker='.', color='deeppink', s=2)
+plt.scatter(tprc, tprc, marker='.', color='deeppink', s=2)
+plt.scatter(tprd, tprd, marker='.', color='deeppink', s=2)
 #cbar = plt.colorbar()
 
 # Define and format minor and major gridlines
@@ -106,5 +107,5 @@ ax.set_aspect(800/800)
 
 # Save and draw plot
 plt.tight_layout()
-plt.savefig('../contact-plots/PflA-gremlin-tprpred-plot-1e'+e, dpi=300)
+plt.savefig('../contact-plots/PflA-gremlin-tprpred-plot-1e'+e+'-msa-'+msa, dpi=300)
 plt.show()
