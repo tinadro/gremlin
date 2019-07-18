@@ -6,7 +6,7 @@ import matplotlib.colors as mcolors
 import sys
 
 data = pd.read_csv('contact-points-distance-measurements-mama.tsv', sep='\t', names=['i', 'j', 'dist'])
-#data = data.sort_values('dist', ascending=True)
+data = data.sort_values('dist', ascending=False)
 
 x =  data['i'].tolist() + data['j'].tolist()
 y = data['j'].tolist() + data['i'].tolist()
@@ -32,6 +32,11 @@ tpr5 = range(183, 215)
 
 tpra = range(11, 40)
 
+mx = max(data['dist'].tolist())
+mn = min(data['dist'].tolist())
+
+s = [((30-1)*((x-mn)/(mx-mn)))+1 for x in data['dist']]
+print(s)
 
 #~~~~~~~~~~
 # PLOTTING
@@ -43,10 +48,10 @@ def truncate_colormap(cmap, minval=0.0, maxval=1.0, n=-1):
 	new_cmap = mcolors.LinearSegmentedColormap.from_list('trunc({name},{a:.2f},{b:.2f})'.format(name=cmap.name, a=minval, b=maxval), cmap(np.linspace(minval, maxval, n)))
 	return new_cmap
 
-cp = truncate_colormap(plt.get_cmap('Greens_r'), 0, 0.8)
+cp = truncate_colormap(plt.get_cmap('Blues_r'), 0, 0.75)
 
 fig, ax = plt.subplots()
-abc = plt.scatter(x, y, marker='.', s=5, c=mtx[x,y], cmap=cp)
+abc = plt.scatter(x, y, marker='.', s=s+s, c=mtx[x,y], cmap=cp)
 
 plt.scatter(tpr1, tpr1, marker='.', color='darkviolet', s=5)
 plt.scatter(tpr2, tpr2, marker='.', color='darkviolet', s=5)
@@ -70,5 +75,5 @@ plt.ylim(217, 0)
 plt.xlim(0, 217)
 ax.set_aspect(217/217)
 plt.tight_layout()
-plt.savefig('MamA-contact-distance-plot', dpi=300)
+plt.savefig('mama-contact-distance-plot', dpi=300)
 plt.show()

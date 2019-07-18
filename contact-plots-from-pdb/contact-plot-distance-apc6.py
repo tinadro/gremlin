@@ -11,7 +11,8 @@ import sys
 #~~~~~~~~~~~~~~
 
 data = pd.read_csv('contact-points-distance-measurements-apc6.tsv', sep='\t', names=['i', 'j', 'dist'])
-#data = data.sort_values('dist', ascending=True)
+#data = data[data['dist'] < 10]
+data = data.sort_values('dist', ascending=False)
 
 x =  data['i'].tolist() + data['j'].tolist()
 y = data['j'].tolist() + data['i'].tolist()
@@ -26,11 +27,9 @@ for ind, row in data.iterrows():
 	s = row['dist']
 	mtx[i,j] = s
 	mtx[j,i] = s
-
-s = [n for n in data['dist']]
-mx = max(s)
-mn = min(s)
-al = [(x-mn)/(mx-mn) for x in s]
+mx = max(data['dist'].tolist())
+mn = min(data['dist'].tolist())
+s = [((30-.001)*((x-mn)/(mx-mn)))+.001 for x in data['dist']]
 
 # TPR data : 
 tpr1 = range(231, 266)
@@ -55,10 +54,10 @@ def truncate_colormap(cmap, minval=0.0, maxval=1.0, n=-1):
 	new_cmap = mcolors.LinearSegmentedColormap.from_list('trunc({name},{a:.2f},{b:.2f})'.format(name=cmap.name, a=minval, b=maxval), cmap(np.linspace(minval, maxval, n)))
 	return new_cmap
 
-cp = truncate_colormap(plt.get_cmap('Greens_r'), 0, 0.8)
+cp = truncate_colormap(plt.get_cmap('Blues_r'), 0, 0.8)
 
 fig, ax = plt.subplots()
-abc = plt.scatter(x, y, marker='.', s=1, c=mtx[x,y], cmap=cp)
+abc = plt.scatter(x, y, marker='.', s=s+s, c=mtx[x,y], cmap=cp)
 
 plt.scatter(tpr1, tpr1, marker='.', color='darkviolet', s=2)
 plt.scatter(tpr2, tpr2, marker='.', color='darkviolet', s=2)
@@ -86,5 +85,5 @@ plt.ylim(620, 0)
 plt.xlim(0, 620)
 ax.set_aspect(620/620)
 plt.tight_layout()
-plt.savefig('APC6-contact-distance-plot', dpi=300)
+plt.savefig('apc6-contact-distance-plot', dpi=300)
 plt.show()
