@@ -61,7 +61,7 @@ def truncate_colormap(cmap, minval=0.0, maxval=1.0, n=-1):
 cp = truncate_colormap(plt.get_cmap('winter_r'), 0.05, 1)
 
 fig, ax = plt.subplots()
-plt.scatter(x, y, marker='.', s=15, c=mtx[x,y], cmap=cp)
+abc = plt.scatter(x, y, marker='.', s=15, c=mtx[x,y], cmap=cp)
 plt.scatter(tpr1, tpr1, marker='.', color='darkviolet', s=2)
 plt.scatter(tpr2, tpr2, marker='.', color='darkviolet', s=2)
 plt.scatter(tpr3, tpr3, marker='.', color='darkviolet', s=2)
@@ -74,7 +74,7 @@ plt.scatter(tpr8, tpr8, marker='.', color='darkviolet', s=2)
 
 plt.scatter(tpra, tpra, marker='.', color='deeppink', s=2)
 plt.scatter(tprb, tprb, marker='.', color='deeppink', s=2)
-# plt.colorbar()
+plt.colorbar(abc)
 
 ax.xaxis.set_minor_locator(AutoMinorLocator(n=5))
 ax.yaxis.set_minor_locator(AutoMinorLocator(n=5))

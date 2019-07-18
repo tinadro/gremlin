@@ -49,7 +49,7 @@ def truncate_colormap(cmap, minval=0.0, maxval=1.0, n=-1):
 	new_cmap = mcolors.LinearSegmentedColormap.from_list('trunc({name},{a:.2f},{b:.2f})'.format(name=cmap.name, a=minval, b=maxval), cmap(np.linspace(minval, maxval, n)))
 	return new_cmap
 
-cp = truncate_colormap(plt.get_cmap('Blues_r'), 0, 0.8)
+cp = truncate_colormap(plt.get_cmap('winter'), 0.2, 1)
 
 fig, ax = plt.subplots()
 abc = plt.scatter(x, y, marker='.', s=s+s, c=mtx[x,y], cmap=cp)
