@@ -1,2 +1,7 @@
 .DS*
+contact-plots-from-pdb/*
+!contact-plots-from-pdb/*.png
+!contact-plots-from-pdb/*.tsv
+!contact-plots-from-pdb/contact-plot-distance*.py
+*.fas
 GREMLIN_TF_v2.ipynb
